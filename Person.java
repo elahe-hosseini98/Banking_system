@@ -9,11 +9,12 @@ public class Person {
     }
 
     public void borrow(Disc disc, Date date) {
+        synchronized (disc) {
 
+        }
     }
 
     public void deliver (Disc disc, Date date){
-
     }
 
     public int getLateDays() {
