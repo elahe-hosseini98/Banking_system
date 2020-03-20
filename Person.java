@@ -5,22 +5,33 @@ import java.util.Objects;
 public class Person {
     String name;
     int lateDays;
+    Date borrowingDate;
+    Disc inHandDisc;
 
     public Person (String name) {
         this.name = name;
     }
 
     public void borrow(Disc disc, Date date) {
-        synchronized (disc) {
-
-        }
+        borrowingDate = date;
+        disc.setBorrowed(true);
     }
 
     public void deliver (Disc disc, Date date){
+        lateDays = Date.passedDays(borrowingDate, date);
+        disc.setBorrowed(false);
     }
 
     public int getLateDays() {
         return lateDays;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override

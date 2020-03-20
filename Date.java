@@ -35,7 +35,7 @@ public class Date {
         this.year = year;
     }
 
-    public int passedDays(Date date1, Date date2) {
+    public static int passedDays(Date date1, Date date2) {
         int passedDays = 0;
 
         while (!date1.equals(date2)) {
@@ -52,7 +52,7 @@ public class Date {
             }
             passedDays++;
         }
-        return passedDays;
+        return passedDays + 1;
     }
 
     @Override
