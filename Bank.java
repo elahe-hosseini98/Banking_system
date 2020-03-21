@@ -10,15 +10,19 @@ public class Bank {
     private static Map<Person, Disc> personDiscMap = new HashMap<>();
 
     public static void main(String[] args) {
-        updatePeapleDiscsState("22 12 98 eli java");
-        updatePeapleDiscsState("1 1 99 eli java");
+        updatePeapleDiscsState(10, "22 12 98 Eli java");
+        updatePeapleDiscsState(10,"1 1 99 Eli java");
+       /* updatePeapleDiscsState(10,"2 4 99 Atefe Shimi");
+        updatePeapleDiscsState(10,"3 5 99 Negar English");
+        updatePeapleDiscsState(10,"4 4 99 Atefe Shimi");*/
         for (Person person : people
         ) {
-            System.out.println("late days: " + person.getLateDays());
+            System.out.println("penalty for '" + person.getName() + "': " + person.getPenalty());
+            System.out.println("penaltyRate for '" + person.getName() + "': " + person.getPenaltyRate());
         }
     }
 
-    public static boolean updatePeapleDiscsState(String newEntry) {
+    public static boolean updatePeapleDiscsState(float penaltyRate, String newEntry) {
         int day, month, year;
         String name, discName;
         String[] arrOfStr = newEntry.split(" ");
@@ -32,9 +36,10 @@ public class Bank {
             System.out.println("__ERROR: bad input!");
             return false;
         }
-        Person person = checkForExistenceOfThisPersonInBank(name);
+        Person person = checkForExistenceOfThisPersonInBank(penaltyRate, name);
         Disc disc = checkForExistenceOfThisDiscInBank(discName);
         Date date = new Date(day, month, year);
+        System.out.println(person.getName());
         if (personDiscMap.isEmpty() || !personDiscMap.get(person).equals(disc)) {
             personDiscMap.put(person, disc);
             borrowingProcess(person, disc, date);
@@ -46,7 +51,7 @@ public class Bank {
         return true;
     }
 
-    public static Person checkForExistenceOfThisPersonInBank(String personName) {
+    public static Person checkForExistenceOfThisPersonInBank(float penaltyRate, String personName) {
         for (Person p : people
         ) {
             if (p.getName().equals(personName)) {
@@ -54,6 +59,7 @@ public class Bank {
             }
         }
         Person person = new Person(personName);
+        person.setPenaltyRate(penaltyRate);
         people.add(person);
         return person;
     }

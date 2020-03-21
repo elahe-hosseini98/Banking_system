@@ -1,21 +1,26 @@
 package ElaheHosseini_HW11_Maktab33;
 
 public class Borrow {
-    Date date;
-    String discName;
+    private Date borrowingDate;
+    private String discName;
 
     public Borrow(Date date, String discName) {
-        this.date = date;
+        this.borrowingDate = date;
         this.discName = discName;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getBorrrowingDate() {
+        return borrowingDate;
     }
 
     public boolean isLate(Date deliveryDate) {
-        //todo
+        if (Date.passedDays(borrowingDate, deliveryDate) > 7) return true;
         return false;
+    }
+
+    public int lateDays (Date deliveryDate) {
+        if (isLate(deliveryDate)) return Date.passedDays(borrowingDate, deliveryDate) - 7;
+        return 0;
     }
 
     public String getDiscName() {
