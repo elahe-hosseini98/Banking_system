@@ -1,9 +1,6 @@
 package ElaheHosseini_HW11_Maktab33;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class Bank {
     private static ArrayList<Person> people = new ArrayList<>();
@@ -11,20 +8,30 @@ public class Bank {
     private static Map<Person, Disc> personDiscMap = new HashMap<>();
 
     public static void main(String[] args) {
-        updatePeapleDiscsState(10, "22 12 98 Eli java");
-        updatePeapleDiscsState(10,"1 1 99 Eli java");
-        updatePeapleDiscsState(10,"2 4 99 Atefe Shimi");
-        updatePeapleDiscsState(10,"3 5 99 Negar English");
-        updatePeapleDiscsState(10,"4 4 99 Atefe Shimi");
-        updatePeapleDiscsState(10,"3 1 99 Eli compiler");
+        Scanner scanner = new Scanner(System.in);
+        int numOfAction, penaltyRate;
 
-        for (Person person : people
-        ) {
-            System.out.println("BorrowList for '" + person.getName() + "': " + person.getBorrowList());
-            System.out.println("penalty for '" + person.getName() + "': " + person.getPenalty());
-            System.out.println("penaltyRate for '" + person.getName() + "': " + person.getPenaltyRate());
-            System.out.println("_________________________________________");
+        while (true) {
+            String numOfActionAndPenaltyRate = scanner.nextLine();
+            String[] arrOfStr = numOfActionAndPenaltyRate.split(" ");
+            try {
+                numOfAction = Integer.parseInt(arrOfStr[0]);
+                penaltyRate = Integer.parseInt(arrOfStr[1]);
+                break;
+            } catch (Exception e) {
+                System.out.println("__ERROR: bad input!");
+            }
         }
+
+        for (int i = 0; i < numOfAction; i++) {
+            while (true) {
+                String newEntry = scanner.nextLine();
+                if (updatePeapleDiscsState(penaltyRate, newEntry)) break;
+            }
+        }
+
+        finesPrinter();
+        notReturnedDiscs();
     }
 
     public static boolean updatePeapleDiscsState(float penaltyRate, String newEntry) {
@@ -86,5 +93,26 @@ public class Bank {
 
     public static void deliveringProcess(Person person, Disc disc, Date deliveringDate) {
         person.deliver(disc, deliveringDate);
+    }
+
+    public static void finesPrinter() {
+        System.out.println("Fines:");
+        for (Person person : people
+        ) {
+            System.out.println(person.getName() + ": " + person.getPenalty());
+        }
+    }
+
+    public static void notReturnedDiscs() {
+        System.out.println("Borrowed Discs:");
+        for (Person person : people
+        ) {
+            if (!person.getBorrowList().isEmpty()) {
+                for (Borrow borrowData : person.getBorrowList()
+                ) {
+                    System.out.println(borrowData.getDiscName());
+                }
+            }
+        }
     }
 }
