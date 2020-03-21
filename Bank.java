@@ -3,6 +3,7 @@ package ElaheHosseini_HW11_Maktab33;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Bank {
     private static ArrayList<Person> people = new ArrayList<>();
@@ -12,16 +13,17 @@ public class Bank {
     public static void main(String[] args) {
         updatePeapleDiscsState(10, "22 12 98 Eli java");
         updatePeapleDiscsState(10,"1 1 99 Eli java");
-        /*updatePeapleDiscsState(10,"2 4 99 Atefe Shimi");
+        updatePeapleDiscsState(10,"2 4 99 Atefe Shimi");
         updatePeapleDiscsState(10,"3 5 99 Negar English");
         updatePeapleDiscsState(10,"4 4 99 Atefe Shimi");
-        updatePeapleDiscsState(10,"3 1 99 Eli compiler");*/
+        updatePeapleDiscsState(10,"3 1 99 Eli compiler");
 
         for (Person person : people
         ) {
-            System.out.println(person.getBorrowList());
+            System.out.println("BorrowList for '" + person.getName() + "': " + person.getBorrowList());
             System.out.println("penalty for '" + person.getName() + "': " + person.getPenalty());
             System.out.println("penaltyRate for '" + person.getName() + "': " + person.getPenaltyRate());
+            System.out.println("_________________________________________");
         }
     }
 
@@ -42,8 +44,7 @@ public class Bank {
         Person person = checkForExistenceOfThisPersonInBank(penaltyRate, name);
         Disc disc = checkForExistenceOfThisDiscInBank(discName);
         Date date = new Date(day, month, year);
-        System.out.println(person.getName());
-        if (personDiscMap.isEmpty() || !personDiscMap.get(person).equals(disc)) {
+        if (personDiscMap.isEmpty() || !Objects.equals(personDiscMap.get(person), disc)) {
             personDiscMap.put(person, disc);
             borrowingProcess(person, disc, date);
         } else {
