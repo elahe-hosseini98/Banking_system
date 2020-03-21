@@ -19,11 +19,18 @@ public class Borrow {
     }
 
     public int lateDays (Date deliveryDate) {
-        if (isLate(deliveryDate)) return Date.passedDays(borrowingDate, deliveryDate) - 7;
+        if (isLate(deliveryDate)) return (Date.passedDays(borrowingDate, deliveryDate) - 7);
         return 0;
     }
 
     public String getDiscName() {
         return discName;
+    }
+
+    @Override
+    public String toString() {
+        return "Borrow{" +
+                "discName='" + discName + '\'' +
+                '}';
     }
 }

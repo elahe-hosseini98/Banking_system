@@ -3,19 +3,10 @@ package ElaheHosseini_HW11_Maktab33;
 import java.util.Objects;
 
 public class Disc {
-    boolean isBorrowed;
     String name;
 
     public Disc(String name) {
         this.name = name;
-    }
-
-    public boolean isBorrowed() {
-        return isBorrowed;
-    }
-
-    public void setBorrowed(boolean borrowed) {
-        isBorrowed = borrowed;
     }
 
     public String getName() {

@@ -5,7 +5,6 @@ import java.util.Objects;
 
 public class Person {
     private String name;
-    private ArrayList<Disc> inHandDisc = new ArrayList<>();
     private ArrayList<Borrow> borrowList = new ArrayList<>();
     private float penaltyRate, penalty = 0;
 
@@ -16,13 +15,9 @@ public class Person {
     public void borrow(Disc disc, Date date) {
         Borrow borrow = new Borrow(date, disc.getName());
         borrowList.add(borrow);
-        disc.setBorrowed(true);
-        inHandDisc.add(disc);
     }
 
     public void deliver(Disc disc, Date date) {
-        inHandDisc.remove(disc);
-        disc.setBorrowed(false);
         addPenalty(disc, date);
     }
 
@@ -57,6 +52,10 @@ public class Person {
 
     public float getPenaltyRate() {
         return penaltyRate;
+    }
+
+    public ArrayList<Borrow> getBorrowList() {
+        return borrowList;
     }
 
     @Override

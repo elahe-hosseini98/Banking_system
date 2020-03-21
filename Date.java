@@ -2,8 +2,12 @@ package ElaheHosseini_HW11_Maktab33;
 
 import java.util.Objects;
 
-public class Date {
+public class Date implements Cloneable {
     int day, month, year;
+
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
 
     public Date(int day, int month, int year) {
         this.day = day;
@@ -36,18 +40,24 @@ public class Date {
     }
 
     public static int passedDays(Date date1, Date date2) {
+        Date data1Copy = null;
+        try {
+            data1Copy = (Date) date1.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
         int passedDays = 0;
 
-        while (!date1.equals(date2)) {
-            if ((date1.getDay() < 30 && date1.getMonth() != 12) || (date1.getDay() < 29 && date1.getMonth() == 12)) {
-                date1.setDay(date1.getDay() + 1);
+        while (!data1Copy.equals(date2)) {
+            if ((data1Copy.getDay() < 30 && data1Copy.getMonth() != 12) || (data1Copy.getDay() < 29 && data1Copy.getMonth() == 12)) {
+                data1Copy.setDay(data1Copy.getDay() + 1);
             } else {
-                date1.setDay(1);
-                if (date1.getMonth() == 12) {
-                    date1.setMonth(1);
-                    date1.setYear(date1.getYear() + 1);
+                data1Copy.setDay(1);
+                if (data1Copy.getMonth() == 12) {
+                    data1Copy.setMonth(1);
+                    data1Copy.setYear(data1Copy.getYear() + 1);
                 } else {
-                    date1.setMonth(date1.getMonth() + 1);
+                    data1Copy.setMonth(data1Copy.getMonth() + 1);
                 }
             }
             passedDays++;
@@ -68,5 +78,14 @@ public class Date {
     @Override
     public int hashCode() {
         return Objects.hash(day, month, year);
+    }
+
+    @Override
+    public String toString() {
+        return "Date{" +
+                "day=" + day +
+                ", month=" + month +
+                ", year=" + year +
+                '}';
     }
 }

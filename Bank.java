@@ -12,11 +12,14 @@ public class Bank {
     public static void main(String[] args) {
         updatePeapleDiscsState(10, "22 12 98 Eli java");
         updatePeapleDiscsState(10,"1 1 99 Eli java");
-       /* updatePeapleDiscsState(10,"2 4 99 Atefe Shimi");
+        /*updatePeapleDiscsState(10,"2 4 99 Atefe Shimi");
         updatePeapleDiscsState(10,"3 5 99 Negar English");
-        updatePeapleDiscsState(10,"4 4 99 Atefe Shimi");*/
+        updatePeapleDiscsState(10,"4 4 99 Atefe Shimi");
+        updatePeapleDiscsState(10,"3 1 99 Eli compiler");*/
+
         for (Person person : people
         ) {
+            System.out.println(person.getBorrowList());
             System.out.println("penalty for '" + person.getName() + "': " + person.getPenalty());
             System.out.println("penaltyRate for '" + person.getName() + "': " + person.getPenaltyRate());
         }
